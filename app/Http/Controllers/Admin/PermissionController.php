@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
@@ -35,7 +36,7 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Permission::create(['name' => 'edit articles']);
     }
 
     /**

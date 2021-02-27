@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,17 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/**
+ * Compiled views cleared!
+ * Application cache cleared!
+ * Route cache cleared!
+ * Configuration cache cleared!
+ * Compiled services and packages files removed!
+ * Caches cleared successfully!
+ */
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('optimize:clear');
+    return '<h1>Cache facade value cleared</h1>';
+});
