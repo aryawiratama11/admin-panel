@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 class AdminUser extends Model
 {
@@ -31,4 +32,11 @@ class AdminUser extends Model
         'password', 'remember_token',
     ];
 
+
+    /**
+     * Return The Role Object of This Admin User
+     */
+    public function role(){
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }
