@@ -20,6 +20,7 @@ class CreateAdminUsersTable extends Migration
             $table->string('password');
             $table->unsignedBigInteger('role_id');
             $table->boolean('is_super')->default(false);
+            $table->boolean('is_active')->default(true);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
