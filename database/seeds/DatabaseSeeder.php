@@ -19,32 +19,104 @@ class DatabaseSeeder extends Seeder
         // Reset cached roles and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // create permissions
-        Permission::create(['name' => 'list admin users']);
-        Permission::create(['name' => 'create admin users']);
-        Permission::create(['name' => 'edit admin users']);
-        Permission::create(['name' => 'delete admin users']);
-        Permission::create(['name' => 'is_active admin users']);
+        // create Main Modules
+        $admin_users_module = Module::create([
+            'name' => 'Admin Users',
+        ]);
 
-        Permission::create(['name' => 'list roles']);
-        Permission::create(['name' => 'create roles']);
-        Permission::create(['name' => 'edit roles']);
-        Permission::create(['name' => 'delete roles']);
-        Permission::create(['name' => 'is_active roles']);
+        $roles_module = Module::create([
+            'name' => 'Roles',
+        ]);
 
-        Permission::create(['name' => 'list modules']);
-        Permission::create(['name' => 'create modules']);
-        Permission::create(['name' => 'edit modules']);
-        Permission::create(['name' => 'delete modules']);
-        Permission::create(['name' => 'is_active modules']);
+        $modules_module = Module::create([
+            'name' => 'Modules',
+        ]);
+
+        // create permissions to admin_user module
+        Permission::create([
+            'name' => 'list admin_users',
+            'module_id' => $admin_users_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'create admin_users',
+            'module_id' => $admin_users_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'edit admin_users',
+            'module_id' => $admin_users_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'delete admin_users',
+            'module_id' => $admin_users_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'is_active admin_users',
+            'module_id' => $admin_users_module->id
+        ]);
+
+        // create permissions to roles module
+        Permission::create([
+            'name' => 'list roles',
+            'module_id' => $roles_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'create roles',
+            'module_id' => $roles_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'edit roles',
+            'module_id' => $roles_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'delete roles',
+            'module_id' => $roles_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'is_active roles',
+            'module_id' => $roles_module->id
+        ]);
+
+        // create permissions to modules module
+        Permission::create([
+            'name' => 'list roles',
+            'module_id' => $modules_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'create roles',
+            'module_id' => $modules_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'edit roles',
+            'module_id' => $modules_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'delete roles',
+            'module_id' => $modules_module->id
+        ]);
+
+        Permission::create([
+            'name' => 'is_active roles',
+            'module_id' => $modules_module->id
+        ]);
 
         // create roles and assign existing permissions
-        $role = Role::create(['name' => 'super-admin']);
-        $role->givePermissionTo('list admin users');
-        $role->givePermissionTo('create admin users');
-        $role->givePermissionTo('edit admin users');
-        $role->givePermissionTo('delete admin users');
-        $role->givePermissionTo('is_active admin users');
+        $role = Role::create(['name' => 'administrator']);
+        $role->givePermissionTo('list admin_users');
+        $role->givePermissionTo('create admin_users');
+        $role->givePermissionTo('edit admin_users');
+        $role->givePermissionTo('delete admin_users');
+        $role->givePermissionTo('is_active admin_users');
 
         $role->givePermissionTo('list roles');
         $role->givePermissionTo('create roles');
@@ -66,12 +138,5 @@ class DatabaseSeeder extends Seeder
             'password' => \Illuminate\Support\Facades\Hash::make('admin'),
         ]);
         $user->assignRole($role);
-
-        Module::createMany([
-            ['Admin Users'],
-            ['Roles'],
-            ['Custom Permissions'],
-            ['Modules'],
-        ]);
     }
 }

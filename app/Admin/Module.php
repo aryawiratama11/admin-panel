@@ -20,10 +20,10 @@ class Module extends Model
 
 
     /**
-     * Return All CustomPermssions Related By This Module
+     * Get The Permissions to The Module
      */
-    public function custompermssions(){
-        //return $this->belongsToMany(CustomPermission::class, 'modules_custom_permissions', 'module_id', 'custom_permission_id');
-        return $this->belongsToMany(CustomPermission::class)->using(ModuleCustomPermission::class);
+    public function permssions()
+    {
+        return $this->hasMany(Permission::class);
     }
 }
