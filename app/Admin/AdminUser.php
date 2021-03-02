@@ -32,6 +32,11 @@ class AdminUser extends Model
         'password', 'remember_token',
     ];
 
+    /**
+     * The guard of module
+     * @var string
+     */
+    protected $guard_name = 'admin';
 
     /**
      * Return The Role Object of This Admin User

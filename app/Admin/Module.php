@@ -18,6 +18,12 @@ class Module extends Model
         'name',
     ];
 
+    /**
+     * The guard of module
+     * @var string
+     */
+    protected $guard_name = 'admin';
+
 
     /**
      * Get The Permissions to The Module
