@@ -36,7 +36,8 @@ class AdminUser extends Model
     /**
      * Return The Role Object of This Admin User
      */
-    public function role(){
+    public function role()
+    {
         return $this->belongsTo(Role::class, 'role_id');
     }
 }
