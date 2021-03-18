@@ -53,7 +53,7 @@
                             <h3 class="opacity-40 font-weight-normal">Sign In To Admin</h3>
                             <p class="opacity-40">Enter your details to login to your account:</p>
                         </div>
-                        <form class="form" id="kt_login_signin_form" action="{{ route('admin_login') }}" method="POST">
+                        <form class="form fv-plugins-bootstrap fv-plugins-framework" id="login_form" action="{{ route('admin_login') }}" method="POST">
                             @csrf
                             @error('email')
                                 <div class="alert alert-danger">
@@ -63,6 +63,13 @@
                             <div class="form-group">
                                 <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}"/>
                             </div>
+                            {{-- <div class="form-group row fv-plugins-icon-container">
+                                <label class="col-form-label text-right col-lg-3 col-sm-12">Email *</label>
+                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                    <input type="text" class="form-control" name="email" placeholder="Enter your email">
+                                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+                                <div class="fv-plugins-message-container"></div></div>
+                            </div> --}}
                             <div class="form-group">
                             @error('password')
                                 <div class="alert alert-danger">
@@ -72,7 +79,7 @@
                                 <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password"/>
                             </div>
                             <div class="form-group text-center mt-10">
-                                <button id="kt_login_signin_submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Sign In</button>
+                                <button id="login_submit" type="submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Sign In</button>
                             </div>
                         </form>
                     </div>
@@ -150,14 +157,14 @@
         <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
-        <script src="assets/plugins/global/plugins.bundle.js"></script>
-        <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-        <script src="assets/js/scripts.bundle.js"></script>
+        <script src="{{ asset('assets/admin/plugins/global/plugins.bundle.js') }}"></script>
+        <script src="{{ asset('assets/admin/plugins/custom/prismjs/prismjs.bundle.js') }}"></script>
+        <script src="{{ asset('assets/admin/js/scripts.bundle.js') }}"></script>
     <!--end::Global Theme Bundle-->
 
 
     <!--begin::Page Scripts(used by this page)-->
-        <script src="assets/js/pages/custom/login/login-general.js"></script>
+        <script src="{{ asset('assets/admin/js/pages/custom/login/login-general.js') }}"></script>
     <!--end::Page Scripts-->
     </body>
     <!--end::Body-->
