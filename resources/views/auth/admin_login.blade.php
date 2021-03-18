@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" >
     <!--begin::Head-->
-    <head><base href="../../../../">
-                <meta charset="utf-8"/>
-        <title>Metronic | Login Page 5</title>
+    <head>
+        <base href="../../../../">
+        <meta charset="utf-8"/>
+        <title>Admin</title>
         <meta name="description" content="Login page example"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
@@ -11,22 +12,22 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"/>        <!--end::Fonts-->
 
 
-                    <!--begin::Page Custom Styles(used by this page)-->
-                             <link href="{{ asset('assets/admin/css/pages/login/classic/login-5.css') }}" rel="stylesheet" type="text/css"/>
-                        <!--end::Page Custom Styles-->
+        <!--begin::Page Custom Styles(used by this page)-->
+        <link href="{{ asset('assets/admin/css/pages/login/classic/login-5.css') }}" rel="stylesheet" type="text/css"/>
+        <!--end::Page Custom Styles-->
 
         <!--begin::Global Theme Styles(used by all pages)-->
-                    <link href="{{ asset('assets/admin/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
-                    <link href="{{ asset('assets/admin/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css"/>
-                    <link href="{{ asset('assets/admin/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
-                <!--end::Global Theme Styles-->
+        <link href="{{ asset('assets/admin/plugins/global/plugins.bundle.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/admin/plugins/custom/prismjs/prismjs.bundle.css') }}" rel="stylesheet" type="text/css"/>
+        <link href="{{ asset('assets/admin/css/style.bundle.css') }}" rel="stylesheet" type="text/css"/>
+        <!--end::Global Theme Styles-->
 
         <!--begin::Layout Themes(used by all pages)-->
-                <!--end::Layout Themes-->
+        <!--end::Layout Themes-->
 
         <link rel="shortcut icon" href="{{ asset('assets/admin/media/logos/favicon.ico') }}"/>
 
-            </head>
+    </head>
     <!--end::Head-->
 
     <!--begin::Body-->
@@ -35,42 +36,53 @@
     	<!--begin::Main-->
 	<div class="d-flex flex-column flex-root">
 		<!--begin::Login-->
-<div class="login login-5 login-signin-on d-flex flex-row-fluid" id="kt_login">
-	<div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url({{ asset('assets/admin/media/bg/bg-2.jpg') }});">
-		<div class="login-form text-center text-white p-7 position-relative overflow-hidden">
-			<!--begin::Login Header-->
-			<div class="d-flex flex-center mb-15">
-				<a href="#">
-					<img src="{{ asset('assets/admin/media/logos/logo-letter-13.png') }}" class="max-h-75px" alt=""/>
-				</a>
-			</div>
-			<!--end::Login Header-->
+        <div class="login login-5 login-signin-on d-flex flex-row-fluid" id="kt_login">
+            <div class="d-flex flex-center bgi-size-cover bgi-no-repeat flex-row-fluid" style="background-image: url({{ asset('assets/admin/media/bg/bg-2.jpg') }});">
+                <div class="login-form text-center text-white p-7 position-relative overflow-hidden">
+                    <!--begin::Login Header-->
+                    <div class="d-flex flex-center mb-15">
+                        <a href="#">
+                            <img src="{{ asset('assets/admin/media/logos/logo-letter-13.png') }}" class="max-h-75px" alt=""/>
+                        </a>
+                    </div>
+                    <!--end::Login Header-->
 
-			<!--begin::Login Sign in form-->
-			<div class="login-signin">
-				<div class="mb-20">
-					<h3 class="opacity-40 font-weight-normal">Sign In To Admin</h3>
-					<p class="opacity-40">Enter your details to login to your account:</p>
-				</div>
-				<form class="form" id="kt_login_signin_form">
-					<div class="form-group">
-						<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="username" autocomplete="off"/>
-					</div>
-					<div class="form-group">
-						<input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password"/>
-					</div>
-					<div class="form-group text-center mt-10">
-						<button id="kt_login_signin_submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Sign In</button>
-					</div>
-				</form>
-			</div>
-			<!--end::Login Sign in form-->
-		</div>
+                    <!--begin::Login Sign in form-->
+                    <div class="login-signin">
+                        <div class="mb-20">
+                            <h3 class="opacity-40 font-weight-normal">Sign In To Admin</h3>
+                            <p class="opacity-40">Enter your details to login to your account:</p>
+                        </div>
+                        <form class="form" id="kt_login_signin_form" action="{{ route('admin_login') }}" method="POST">
+                            @csrf
+                            @error('email')
+                                <div class="alert alert-danger">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                            <div class="form-group">
+                                <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}"/>
+                            </div>
+                            <div class="form-group">
+                            @error('password')
+                                <div class="alert alert-danger">
+                                    <p>{{ $message }}</p>
+                                </div>
+                            @enderror
+                                <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password"/>
+                            </div>
+                            <div class="form-group text-center mt-10">
+                                <button id="kt_login_signin_submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Sign In</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!--end::Login Sign in form-->
+                </div>
+            </div>
+        </div>
+        <!--end::Login-->
 	</div>
-</div>
-<!--end::Login-->
-	</div>
-<!--end::Main-->
+    <!--end::Main-->
 
 
         <script>var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";</script>
@@ -137,16 +149,16 @@
         </script>
         <!--end::Global Config-->
 
-    	<!--begin::Global Theme Bundle(used by all pages)-->
-    	    	   <script src="assets/plugins/global/plugins.bundle.js"></script>
-		    	   <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-		    	   <script src="assets/js/scripts.bundle.js"></script>
-				<!--end::Global Theme Bundle-->
+    <!--begin::Global Theme Bundle(used by all pages)-->
+        <script src="assets/plugins/global/plugins.bundle.js"></script>
+        <script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+        <script src="assets/js/scripts.bundle.js"></script>
+    <!--end::Global Theme Bundle-->
 
 
-                    <!--begin::Page Scripts(used by this page)-->
-                            <script src="assets/js/pages/custom/login/login-general.js"></script>
-                        <!--end::Page Scripts-->
-            </body>
+    <!--begin::Page Scripts(used by this page)-->
+        <script src="assets/js/pages/custom/login/login-general.js"></script>
+    <!--end::Page Scripts-->
+    </body>
     <!--end::Body-->
 </html>
