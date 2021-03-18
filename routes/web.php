@@ -26,6 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Admin routes
  */
+Route::get('/admin', 'Admin\DashboardController@index');
 Route::get('/admin/login', 'Auth\LoginController@showAdminLoginForm');
 Route::post('/admin/login/', 'Auth\LoginController@loginAdmin');
 
