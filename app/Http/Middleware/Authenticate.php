@@ -2,10 +2,20 @@
 
 namespace App\Http\Middleware;
 
+use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class Authenticate extends Middleware
 {
+    public function handle($request, Closure $next, $guard = null)
+    {
+        if ($guard == "admin" && !Auth::guard($guard)->check()) {
+            return Redirect::to('/admin/login');
+        }
+        return $next($request);
+    }
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *

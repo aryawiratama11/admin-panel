@@ -26,9 +26,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 /**
  * Admin routes
  */
-Route::get('/admin', 'Admin\DashboardController@index')->name('dashboard');
-Route::get('/admin/login', 'Auth\LoginController@showAdminLoginForm')->name('admin_login');;
-Route::post('/admin/login/', 'Auth\LoginController@loginAdmin')->name('admin_login');;
+Route::group([
+    'prefix' => 'admin',
+    'middleware' => 'auth:admin'
+], function(){
+    Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
+    Route::get('/login', 'Auth\LoginController@showAdminLoginForm')->withoutMiddleware('auth:admin')->name('admin_login');
+    Route::post('/login', 'Auth\LoginController@loginAdmin')->withoutMiddleware('auth:admin')->name('admin_login');
+});
 
 
 /**
