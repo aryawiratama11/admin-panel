@@ -63,13 +63,6 @@
                             <div class="form-group">
                                 <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="text" placeholder="Email" name="email" autocomplete="off" value="{{ old('email') }}"/>
                             </div>
-                            {{-- <div class="form-group row fv-plugins-icon-container">
-                                <label class="col-form-label text-right col-lg-3 col-sm-12">Email *</label>
-                                <div class="col-lg-9 col-md-9 col-sm-12">
-                                    <input type="text" class="form-control" name="email" placeholder="Enter your email">
-                                    <span class="form-text text-muted">We'll never share your email with anyone else.</span>
-                                <div class="fv-plugins-message-container"></div></div>
-                            </div> --}}
                             <div class="form-group">
                             @error('password')
                                 <div class="alert alert-danger">
@@ -77,6 +70,15 @@
                                 </div>
                             @enderror
                                 <input class="form-control h-auto text-white bg-white-o-5 rounded-pill border-0 py-4 px-8" type="password" placeholder="Password" name="password"/>
+                            </div>
+                            <div class="form-group d-flex flex-wrap justify-content-between align-items-center px-8 opacity-60">
+                                <div class="checkbox-inline">
+                                    <label class="checkbox checkbox-outline checkbox-white text-white m-0">
+                                        <input type="checkbox" name="remember"/>
+                                        <span></span>
+                                        Remember me
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-group text-center mt-10">
                                 <button id="login_submit" type="submit" class="btn btn-pill btn-primary opacity-90 px-15 py-3">Sign In</button>

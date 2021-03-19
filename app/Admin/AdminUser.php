@@ -2,13 +2,13 @@
 
 namespace App\Admin;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class AdminUser extends Model
+class AdminUser extends Authenticatable
 {
     use HasRoles;
     use Notifiable;
@@ -37,6 +37,12 @@ class AdminUser extends Model
      * @var string
      */
     protected $guard_name = 'admin';
+
+    /**
+     * The table of module
+     * @var string
+     */
+    protected $table = 'admin_users';
 
     /**
      * Return The Role Object of This Admin User

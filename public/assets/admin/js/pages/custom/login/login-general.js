@@ -41,7 +41,7 @@ var KTLogin = function() {
 								message: 'Password is required'
                             },
                             stringLength: {
-                                min:6,
+                                min:5,
                                 message: 'Password must be at least 6 characters'
                             }
 						}
@@ -61,7 +61,8 @@ var KTLogin = function() {
 
             validation.validate().then(function(status) {
 		        if (status == 'Valid') {
-                    swal.fire({
+                    $('form#login_form').submit();
+                    /* swal.fire({
 		                text: "All is cool! Now you submit this form",
 		                icon: "success",
 		                buttonsStyling: false,
@@ -70,8 +71,8 @@ var KTLogin = function() {
     						confirmButton: "btn font-weight-bold btn-light-primary"
     					}
 		            }).then(function() {
-						KTUtil.scrollTop();
-					});
+                        KTUtil.scrollTop();
+					}); */
 				} else {
 					swal.fire({
 		                text: "Sorry, looks like there are some errors detected, please try again.",
