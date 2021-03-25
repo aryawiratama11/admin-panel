@@ -31,8 +31,8 @@ Route::group([
     'middleware' => 'auth:admin'
 ], function(){
     Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
-    Route::get('/login', 'Auth\LoginController@showAdminLoginForm')->withoutMiddleware('auth:admin')->name('admin_login');
-    Route::post('/login', 'Auth\LoginController@loginAdmin')->withoutMiddleware('auth:admin')->name('admin_login');
+    Route::get('/login', 'Auth\LoginController@showAdminLoginForm')->withoutMiddleware('auth:admin')->name('admin.login');
+    Route::post('/login', 'Auth\LoginController@loginAdmin')->withoutMiddleware('auth:admin')->name('admin.login');
 });
 
 

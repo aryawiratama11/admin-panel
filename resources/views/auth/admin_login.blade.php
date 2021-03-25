@@ -53,7 +53,7 @@
                             <h3 class="opacity-40 font-weight-normal">Sign In To Admin</h3>
                             <p class="opacity-40">Enter your details to login to your account:</p>
                         </div>
-                        <form class="form fv-plugins-bootstrap fv-plugins-framework" id="login_form" action="{{ route('admin_login') }}" method="POST">
+                        <form class="form fv-plugins-bootstrap fv-plugins-framework" id="login_form" action="{{ route('admin.login') }}" method="POST">
                             @csrf
                             @error('email')
                                 <div class="alert alert-danger">
