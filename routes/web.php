@@ -29,10 +29,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
     'prefix' => 'admin',
     'middleware' => 'auth:admin'
-], function(){
+], function () {
     Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
-    Route::get('/login', 'Auth\LoginController@showAdminLoginForm')->withoutMiddleware('auth:admin')->name('admin.login');
-    Route::post('/login', 'Auth\LoginController@loginAdmin')->withoutMiddleware('auth:admin')->name('admin.login');
+    Route::get('/login', 'Admin\LoginController@showLoginForm')->withoutMiddleware('auth:admin')->name('show.admin.login');
+    Route::post('/login', 'Admin\LoginController@login')->withoutMiddleware('auth:admin')->name('admin.login');
 });
 
 
@@ -44,7 +44,7 @@ Route::group([
  * Compiled services and packages files removed!
  * Caches cleared successfully!
  */
-Route::get('/clear-cache', function() {
+Route::get('/clear-cache', function () {
     $exitCode = Artisan::call('optimize:clear');
     return '<h1>Cache facade value cleared</h1>';
 });

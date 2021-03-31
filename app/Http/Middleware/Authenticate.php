@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\Redirect;
 
 class Authenticate extends Middleware
 {
-    public function handle($request, Closure $next, $guard = null)
+
+    public function handle($request, Closure $next, ...$guards)
     {
-        if ($guard == "admin" && !Auth::guard($guard)->check()) {
+        if ($guards[0] == "admin" && !Auth::guard($guards[0])->check()) {
             return Redirect::to('/admin/login');
         }
+
         return $next($request);
     }
     /**
