@@ -15,10 +15,4 @@ interface AdminUserRepositoryInterface
      * @return Collection
      */
     public function all(): Collection;
-
-    /**
-     * @param $id
-     * @return AdminUser
-     */
-    public function find($id): ?AdminUser;
 }
