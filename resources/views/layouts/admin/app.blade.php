@@ -5,7 +5,7 @@
 <head>
     <base href="">
     <meta charset="utf-8" />
-    <title>Metronic | Dashboard</title>
+    <title>@yield('title', 'Metronic')</title>
     <meta name="description" content="Updates and statistics" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
@@ -57,7 +57,9 @@
                     <!--end::Header-->
                     <!--begin::Content-->
                     <div class="content  d-flex flex-column flex-column-fluid" id="kt_content">
-
+                        <!--begin::Subheader-->
+                        @yield('subheader')
+                        <!--end::Subheader-->
 
                         <!--begin::Entry-->
                         <div class="d-flex flex-column-fluid">
@@ -105,7 +107,7 @@
         <!--end::Scrolltop-->
 
         <script>
-            var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+            var HOST_URL = "{{ url('/') }}";
 
         </script>
         <!--begin::Global Config(global config for global JS scripts)-->
@@ -186,6 +188,7 @@
         <!--begin::Page Scripts(used by this page)-->
         <script src="{{ asset('assets/admin/js/pages/widgets.js') }}"></script>
         <!--end::Page Scripts-->
+        @yield('script')
         <!-- Code injected by live-server -->
         <script type="text/javascript">
             // <![CDATA[  <-- For SVG support
@@ -211,11 +214,6 @@
                     }
                     var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
                     var address = protocol + window.location.host + window.location.pathname + '/ws';
-                    var socket = new WebSocket(address);
-                    socket.onmessage = function(msg) {
-                        if (msg.data == 'reload') window.location.reload();
-                        else if (msg.data == 'refreshcss') refreshCSS();
-                    };
                     if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
                         console.log('Live reload enabled.');
                         sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
