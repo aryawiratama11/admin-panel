@@ -1,30 +1,24 @@
-"use strict";
+'use strict';
 // Class definition
 
-var KTDatatableColumnRenderingDemo = function () {
+var KTDatatableDataLocalDemo = function () {
     // Private functions
 
-    // basic demo
+    // demo initializer
     var demo = function () {
 
         var datatable = $('#kt_datatable').KTDatatable({
             // datasource definition
             data: {
-                type: 'remote',
-                source: {
-                    read: {
-                        url: HOST_URL + '/api/v1/admin/users',
-                    },
-                },
-                pageSize: 10, // display 20 records per page
-                serverPaging: true,
-                serverFiltering: true,
-                serverSorting: true,
+                type: 'local',
+                source: dataJSONArray,
+                pageSize: 10,
             },
 
             // layout definition
             layout: {
                 scroll: false, // enable/disable datatable scroll both horizontal and vertical when needed.
+                // height: 450, // datatable's body's fixed height
                 footer: false, // display/hide footer
             },
 
@@ -35,26 +29,27 @@ var KTDatatableColumnRenderingDemo = function () {
 
             search: {
                 input: $('#kt_datatable_search_query'),
-                delay: 400,
                 key: 'generalSearch'
             },
 
             // columns definition
             columns: [{
-                field: 'user_id',
+                field: 'id',
                 title: '#',
-                sortable: 'asc',
-                width: 40,
+                sortable: false,
+                width: 20,
                 type: 'number',
-                selector: false,
+                selector: {
+                    class: ''
+                },
                 textAlign: 'center',
             }, {
-                field: 'user_name',
-                title: 'User',
+                field: 'name',
+                title: 'Name',
                 width: 250,
                 template: function (data) {
                     var number = KTUtil.getRandomInt(1, 14);
-                    var user_img = 'background-image:url(\'assets/media/users/100_' + number + '.jpg\')';
+                    /* var user_img = 'background-image:url(\'assets/media/users/100_' + number + '.jpg\')';
 
                     var output = '';
                     if (number > 8) {
@@ -63,12 +58,12 @@ var KTDatatableColumnRenderingDemo = function () {
 									<div class="symbol-label" style="' + user_img + '"></div>\
 								</div>\
 								<div class="ml-2">\
-									<div class="text-dark-75 font-weight-bold line-height-sm">' + data.user_name + '</div>\
+									<div class="text-dark-75 font-weight-bold line-height-sm">' + data.CompanyAgent + '</div>\
 									<a href="#" class="font-size-sm text-dark-50 text-hover-primary">' +
-                            data.email + '</a>\
+                            data.CompanyEmail + '</a>\
 								</div>\
 							</div>';
-                    } else {
+                    } else { */
                         var stateNo = KTUtil.getRandomInt(0, 7);
                         var states = [
                             'success',
@@ -81,47 +76,45 @@ var KTDatatableColumnRenderingDemo = function () {
                             'info'
                         ];
                         var state = states[stateNo];
-
+                        var output = '';
                         output = '<div class="d-flex align-items-center">\
 								<div class="symbol symbol-40 symbol-' + state + ' flex-shrink-0">\
-									<div class="symbol-label">' + data.user_name.substring(0, 1) + '</div>\
+									<div class="symbol-label">' + data.name.substring(0, 1) + '</div>\
 								</div>\
 								<div class="ml-2">\
-									<div class="text-dark-75 font-weight-bold line-height-sm">' + data.user_name + '</div>\
+									<div class="text-dark-75 font-weight-bold line-height-sm">' + data.name + '</div>\
 									<a href="#" class="font-size-sm text-dark-50 text-hover-primary">' +
                             data.email + '</a>\
 								</div>\
 							</div>';
-                    }
+                    //}
 
                     return output;
-                },
+                }
             }, {
                 field: 'email',
                 title: 'Email',
-                template: function (row) {
-                    return row.email;
-                },
             }, {
-                field: 'role',
-                title: 'Role',
-            }, {
-                field: 'status',
+                field: 'is_active',
                 title: 'Status',
                 // callback function support for column rendering
                 template: function (row) {
                     var status = {
-                        0: {
-                            'title': 'Active',
-                            'class': ' label-light-primary'
-                        },
                         1: {
+                            'title': 'Active',
+                            'class': ' label-light-success'
+                        },
+                        2: {
                             'title': 'Inactive',
-                            'class': 'label-light-danger'
-                        }
+                            'class': ' label-light-danger'
+                        },
                     };
-                    return '<span class="label font-weight-bold label-lg ' + status[row.Status].class + ' label-inline">' + status[row.Status].title + '</span>';
+                    return '<span class="label font-weight-bold label-lg ' + status[row.is_active].class + ' label-inline">' + status[row.is_active].title + '</span>';
                 },
+            }, {
+                field: 'role',
+                title: 'Role',
+                autoHide: false,
             }, {
                 field: 'Actions',
                 title: 'Actions',
@@ -131,9 +124,56 @@ var KTDatatableColumnRenderingDemo = function () {
                 autoHide: false,
                 template: function () {
                     return '\
-	                        <div class="dropdown dropdown-inline">\
-	                        </div>\
-	                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
+							<div class="dropdown dropdown-inline">\
+								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" data-toggle="dropdown">\
+	                                <span class="svg-icon svg-icon-md">\
+	                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
+	                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
+	                                            <rect x="0" y="0" width="24" height="24"/>\
+	                                            <path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000"/>\
+	                                        </g>\
+	                                    </svg>\
+	                                </span>\
+	                            </a>\
+							  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">\
+	                                <ul class="navi flex-column navi-hover py-2">\
+	                                    <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">\
+	                                        Choose an action:\
+	                                    </li>\
+	                                    <li class="navi-item">\
+	                                        <a href="#" class="navi-link">\
+	                                            <span class="navi-icon"><i class="la la-print"></i></span>\
+	                                            <span class="navi-text">Print</span>\
+	                                        </a>\
+	                                    </li>\
+	                                    <li class="navi-item">\
+	                                        <a href="#" class="navi-link">\
+	                                            <span class="navi-icon"><i class="la la-copy"></i></span>\
+	                                            <span class="navi-text">Copy</span>\
+	                                        </a>\
+	                                    </li>\
+	                                    <li class="navi-item">\
+	                                        <a href="#" class="navi-link">\
+	                                            <span class="navi-icon"><i class="la la-file-excel-o"></i></span>\
+	                                            <span class="navi-text">Excel</span>\
+	                                        </a>\
+	                                    </li>\
+	                                    <li class="navi-item">\
+	                                        <a href="#" class="navi-link">\
+	                                            <span class="navi-icon"><i class="la la-file-text-o"></i></span>\
+	                                            <span class="navi-text">CSV</span>\
+	                                        </a>\
+	                                    </li>\
+	                                    <li class="navi-item">\
+	                                        <a href="#" class="navi-link">\
+	                                            <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>\
+	                                            <span class="navi-text">PDF</span>\
+	                                        </a>\
+	                                    </li>\
+	                                </ul>\
+							  	</div>\
+							</div>\
+							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
 	                            <span class="svg-icon svg-icon-md">\
 	                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
 	                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
@@ -143,8 +183,8 @@ var KTDatatableColumnRenderingDemo = function () {
 	                                    </g>\
 	                                </svg>\
 	                            </span>\
-	                        </a>\
-	                        <a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">\
+							</a>\
+							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon" title="Delete">\
 	                            <span class="svg-icon svg-icon-md">\
 	                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
 	                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
@@ -154,11 +194,10 @@ var KTDatatableColumnRenderingDemo = function () {
 	                                    </g>\
 	                                </svg>\
 	                            </span>\
-	                        </a>\
-	                    ';
+							</a>\
+						';
                 },
             }],
-
         });
 
         $('#kt_datatable_search_status').on('change', function () {
@@ -170,17 +209,17 @@ var KTDatatableColumnRenderingDemo = function () {
         });
 
         $('#kt_datatable_search_status, #kt_datatable_search_role').selectpicker();
-
     };
 
     return {
-        // public functions
+        // Public functions
         init: function () {
+            // init dmeo
             demo();
         },
     };
 }();
 
 jQuery(document).ready(function () {
-    KTDatatableColumnRenderingDemo.init();
+    KTDatatableDataLocalDemo.init();
 });

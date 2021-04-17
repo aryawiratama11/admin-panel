@@ -6,6 +6,7 @@ use App\Models\AdminUser;
 use App\Http\Controllers\Controller;
 use App\Repositories\AdminUserRepositoryInterface;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
 {
@@ -27,9 +28,10 @@ class AdminUserController extends Controller
     public function index()
     {
         $adminUsers = $this->adminUserRepository->all();
-
+        $roles = Role::all();
         return view('admin.users.index', [
-            'users' => $adminUsers
+            'users' => $adminUsers,
+            'roles' => $roles
         ]);
     }
 
