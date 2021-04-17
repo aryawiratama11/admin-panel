@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AdminUser;
 use App\Http\Controllers\Controller;
+use App\Repositories\AdminUserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class AdminUserController extends Controller
 {
+    private $adminUserRepository;
+
+    /**
+     *@param AdminUserRepositoryInterface
+     */
+    public function __construct(AdminUserRepositoryInterface $adminUserRepository)
+    {
+        $this->adminUserRepository = $adminUserRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +26,11 @@ class AdminUserController extends Controller
      */
     public function index()
     {
-        //
+        $adminUsers = $this->adminUserRepository->all();
+
+        return view('admin.users.index', [
+            'users' => $adminUsers
+        ]);
     }
 
     /**
