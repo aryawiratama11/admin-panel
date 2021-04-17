@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\PermissionRegistrar;
-use App\Admin\Module;
+use App\Models\Module;
 
 class PermissionSeeder extends Seeder
 {
