@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AdminUser;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\AdminUserResource;
 use App\Repositories\AdminUserRepositoryInterface;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -29,8 +30,9 @@ class AdminUserController extends Controller
     {
         $adminUsers = $this->adminUserRepository->all();
         $roles = Role::all();
+
         return view('admin.users.index', [
-            'users' => $adminUsers,
+            'users' => AdminUserResource::collection($adminUsers),
             'roles' => $roles
         ]);
     }

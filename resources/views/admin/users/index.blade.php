@@ -293,7 +293,7 @@
 
 @section('script')
     <script>
-        var dataJSONArray = JSON.parse('{!! json_encode($users) !!}');
+        var dataJSONArray = {!! json_encode($users) !!};
     </script>
     <script src="{{ asset('assets/admin/js/data-rendering/admin-users.js') }}"></script>
 @endsection
