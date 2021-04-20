@@ -23,23 +23,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-/**
- * Admin routes
- */
-Route::group([
-    'prefix' => 'admin',
-    'middleware' => 'auth:admin'
-], function () {
-    Route::get('/', 'Admin\DashboardController@index')->name('dashboard');
-    Route::get('/login', 'Admin\LoginController@showLoginForm')->withoutMiddleware('auth:admin')->name('show.admin.login');
-    Route::post('/login', 'Admin\LoginController@login')->withoutMiddleware('auth:admin')->name('admin.login');
-
-    Route::name('admin.')->group(function() {
-        Route::resource('/users', 'Admin\AdminUserController')->name('', 'users');
-    });
-
-});
-
 
 /**
  * Compiled views cleared!
