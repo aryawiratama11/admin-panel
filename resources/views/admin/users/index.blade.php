@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('title')
-    Admin-Users
+    Admin-Users Settings
 @endsection
 
 @section('subheader')
@@ -14,26 +14,13 @@
                 <div class="d-flex align-items-baseline flex-wrap mr-5">
                     <!--begin::Page Title-->
                     <h5 class="text-dark font-weight-bold my-1 mr-5">
-                        Local Data </h5>
+                        @lang( 'admin.users_settings' )</h5>
                     <!--end::Page Title-->
-
                     <!--begin::Breadcrumb-->
                     <ul class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                         <li class="breadcrumb-item">
-                            <a href="" class="text-muted">
-                                Crud </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="" class="text-muted">
-                                KTDatatable </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="" class="text-muted">
-                                Base </a>
-                        </li>
-                        <li class="breadcrumb-item">
-                            <a href="" class="text-muted">
-                                Local Data </a>
+                            <a href="#" class="text-muted">
+                                @lang( 'admin.' . $module ) </a>
                         </li>
                     </ul>
                     <!--end::Breadcrumb-->
@@ -46,7 +33,7 @@
             <div class="d-flex align-items-center">
                 <!--begin::Actions-->
                 <a href="#" class="btn btn-light-primary font-weight-bolder btn-sm">
-                    Actions
+                    @lang( 'admin.actions' )
                 </a>
                 <!--end::Actions-->
 
@@ -73,51 +60,36 @@
                         <!--begin::Navigation-->
                         <ul class="navi navi-hover">
                             <li class="navi-header font-weight-bold py-4">
-                                <span class="font-size-lg">Choose Label:</span>
+                                <span class="font-size-lg">@lang( 'admin.choose_label' ):</span>
                                 <i class="flaticon2-information icon-md text-muted" data-toggle="tooltip"
                                     data-placement="right" title="Click to learn more..."></i>
                             </li>
                             <li class="navi-separator mb-3 opacity-70"></li>
                             <li class="navi-item">
-                                <a href="#" class="navi-link">
+                                <a href="{{ route('admin.users.index') }}" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-success">Customer</span>
+                                        <span class="label label-xl label-inline label-light-success">@lang( 'admin.users' )</span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-item">
-                                <a href="#" class="navi-link">
+                                <a href="{{ route('admin.roles.index') }}" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-danger">Partner</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="navi-item">
-                                <a href="#" class="navi-link">
-                                    <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-warning">Suplier</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="navi-item">
-                                <a href="#" class="navi-link">
-                                    <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-primary">Member</span>
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="navi-item">
-                                <a href="#" class="navi-link">
-                                    <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-dark">Staff</span>
+                                        <span class="label label-xl label-inline label-light-danger">@lang( 'admin.roles' )</span>
                                     </span>
                                 </a>
                             </li>
                             <li class="navi-separator mt-3 opacity-70"></li>
                             <li class="navi-footer py-4">
-                                <a class="btn btn-clean font-weight-bold btn-sm" href="#">
+                                <a class="btn btn-clean font-weight-bold btn-sm" href="{{ route('admin.users.create') }}">
                                     <i class="ki ki-plus icon-sm"></i>
-                                    Add new
+                                    @lang( 'admin.add' ) @lang( 'admin.new' ) @lang( 'admin.user' )
+                                </a>
+                            </li>
+                            <li class="navi-footer py-4">
+                                <a class="btn btn-clean font-weight-bold btn-sm" href="{{ route('admin.roles.create') }}">
+                                    <i class="ki ki-plus icon-sm"></i>
+                                    @lang( 'admin.add' ) @lang( 'admin.new' ) @lang( 'admin.role' )
                                 </a>
                             </li>
                         </ul>
@@ -132,36 +104,13 @@
 @endsection
 
 @section('content')
-    <!--begin::Notice-->
-    <div class="alert alert-custom alert-white alert-shadow gutter-b" role="alert">
-        <div class="alert-icon">
-            <span class="svg-icon svg-icon-primary svg-icon-xl">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Tools/Compass.svg--><svg
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px"
-                    viewBox="0 0 24 24" version="1.1">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <rect x="0" y="0" width="24" height="24" />
-                        <path
-                            d="M7.07744993,12.3040451 C7.72444571,13.0716094 8.54044565,13.6920474 9.46808594,14.1079953 L5,23 L4.5,18 L7.07744993,12.3040451 Z M14.5865511,14.2597864 C15.5319561,13.9019016 16.375416,13.3366121 17.0614026,12.6194459 L19.5,18 L19,23 L14.5865511,14.2597864 Z M12,3.55271368e-14 C12.8284271,3.53749572e-14 13.5,0.671572875 13.5,1.5 L13.5,4 L10.5,4 L10.5,1.5 C10.5,0.671572875 11.1715729,3.56793164e-14 12,3.55271368e-14 Z"
-                            fill="#000000" opacity="0.3" />
-                        <path
-                            d="M12,10 C13.1045695,10 14,9.1045695 14,8 C14,6.8954305 13.1045695,6 12,6 C10.8954305,6 10,6.8954305 10,8 C10,9.1045695 10.8954305,10 12,10 Z M12,13 C9.23857625,13 7,10.7614237 7,8 C7,5.23857625 9.23857625,3 12,3 C14.7614237,3 17,5.23857625 17,8 C17,10.7614237 14.7614237,13 12,13 Z"
-                            fill="#000000" fill-rule="nonzero" />
-                    </g>
-                </svg>
-                <!--end::Svg Icon-->
-            </span>
-        </div>
-    </div>
-    <!--end::Notice-->
-
     <!--begin::Card-->
     <div class="card card-custom">
         <div class="card-header flex-wrap border-0 pt-6 pb-0">
             <div class="card-title">
                 <h3 class="card-label">
-                    Admin Panel Users
-                    <span class="text-muted pt-2 font-size-sm d-block">System Users</span>
+                    @lang( 'admin.admin_panel' ) - @lang( 'admin.' . $module )
+                    <span class="text-muted pt-2 font-size-sm d-block">@lang( 'admin.' . $module )</span>
                 </h3>
             </div>
             <div class="card-toolbar">
@@ -184,37 +133,17 @@
                                 </g>
                             </svg>
                             <!--end::Svg Icon-->
-                        </span> Export
+                        </span> @lang( 'admin.export' )
                     </button>
 
                     <!--begin::Dropdown Menu-->
-                    <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                        <!--begin::Navigation-->
-                        <ul class="navi flex-column navi-hover py-2">
-                            <li class="navi-header font-weight-bolder text-uppercase font-size-sm text-primary pb-2">
-                                Choose an option:
-                            </li>
-                            <li class="navi-item">
-                                <a href="#" class="navi-link">
-                                    <span class="navi-icon"><i class="la la-file-excel-o"></i></span>
-                                    <span class="navi-text">Excel</span>
-                                </a>
-                            </li>
-                            <li class="navi-item">
-                                <a href="#" class="navi-link">
-                                    <span class="navi-icon"><i class="la la-file-text-o"></i></span>
-                                    <span class="navi-text">CSV</span>
-                                </a>
-                            </li>
-                        </ul>
-                        <!--end::Navigation-->
-                    </div>
+
                     <!--end::Dropdown Menu-->
                 </div>
                 <!--end::Dropdown-->
 
                 <!--begin::Button-->
-                <a href="#" class="btn btn-primary font-weight-bolder">
+                <a href="{{ route('admin.users.create') }}" class="btn btn-primary font-weight-bolder">
                     <span class="svg-icon svg-icon-md">
                         <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Flatten.svg--><svg
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
@@ -228,7 +157,7 @@
                             </g>
                         </svg>
                         <!--end::Svg Icon-->
-                    </span> New Record
+                    </span> @lang( 'admin.new_record' )
                 </a>
                 <!--end::Button-->
             </div>
@@ -250,21 +179,22 @@
 
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Status:</label>
+                                    <label class="mr-3 mb-0 d-none d-md-block">@lang( 'admin.status' ):</label>
                                     <select class="form-control" id="kt_datatable_search_status">
-                                        <option value="">All</option>
-                                        <option value="1">Active</option>
-                                        <option value="2">Inactive</option>
+                                        <option value=""> @lang( 'admin.all' ) </option>
+                                        <option value="1"> @lang( 'admin.active' ) </option>
+                                        <option value="2"> @lang( 'admin.inactive' ) </option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4 my-2 my-md-0">
                                 <div class="d-flex align-items-center">
-                                    <label class="mr-3 mb-0 d-none d-md-block">Role:</label>
+                                    <label class="mr-3 mb-0 d-none d-md-block"> @lang( 'admin.role' ):</label>
                                     <select class="form-control" id="kt_datatable_search_role">
-                                        <option value="">All</option>
-                                        @foreach($roles as $role)
-                                        <option value="{{ ucfirst( $role->name ) }}">{{ ucfirst( $role->name ) }}</option>
+                                        <option value=""> @lang( 'admin.all' ) </option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ ucfirst($role->name) }}">{{ ucfirst($role->name) }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -273,7 +203,7 @@
                     </div>
                     <div class="col-lg-3 col-xl-4 mt-5 mt-lg-0">
                         <a href="#" class="btn btn-light-primary px-6 font-weight-bold">
-                            Search
+                            @lang( 'admin.search')
                         </a>
                     </div>
                 </div>
@@ -294,7 +224,7 @@
 @section('script')
     <script>
         var dataJSONArray = {!! json_encode($users) !!};
-        console.log(dataJSONArray);
+
     </script>
     <script src="{{ asset('assets/admin/js/data-rendering/admin-users.js') }}"></script>
 @endsection

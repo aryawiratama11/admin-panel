@@ -33,7 +33,8 @@ class AdminUserController extends Controller
 
         return view('admin.users.index', [
             'users' => AdminUserResource::collection($adminUsers),
-            'roles' => $roles
+            'roles' => $roles,
+            'module' => 'users',
         ]);
     }
 
