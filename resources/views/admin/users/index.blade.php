@@ -264,7 +264,7 @@
                                     <select class="form-control" id="kt_datatable_search_role">
                                         <option value="">All</option>
                                         @foreach($roles as $role)
-                                        <option value="{{ $role->id }}">{{ ucfirst($role->name) }}</option>
+                                        <option value="{{ ucfirst( $role->name ) }}">{{ ucfirst( $role->name ) }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -294,6 +294,7 @@
 @section('script')
     <script>
         var dataJSONArray = {!! json_encode($users) !!};
+        console.log(dataJSONArray);
     </script>
     <script src="{{ asset('assets/admin/js/data-rendering/admin-users.js') }}"></script>
 @endsection

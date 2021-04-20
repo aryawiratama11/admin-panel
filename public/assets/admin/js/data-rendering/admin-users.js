@@ -2,7 +2,6 @@
 // Class definition
 
 var KTDatatableDataLocalDemo = function () {
-    // Private functions
 
     // demo initializer
     var demo = function () {
@@ -34,18 +33,9 @@ var KTDatatableDataLocalDemo = function () {
 
             // columns definition
             columns: [{
-                field: 'id',
-                title: '#',
-                sortable: false,
-                width: 20,
-                type: 'number',
-                selector: {
-                    class: ''
-                },
-                textAlign: 'center',
-            }, {
                 field: 'name',
                 title: 'Name',
+                autoHide: false,
                 width: 250,
                 template: function (data) {
                     var number = KTUtil.getRandomInt(1, 14);
@@ -64,27 +54,27 @@ var KTDatatableDataLocalDemo = function () {
 								</div>\
 							</div>';
                     } else { */
-                        var stateNo = KTUtil.getRandomInt(0, 7);
-                        var states = [
-                            'success',
-                            'primary',
-                            'danger',
-                            'success',
-                            'warning',
-                            'dark',
-                            'primary',
-                            'info'
-                        ];
-                        var state = states[stateNo];
-                        var output = '';
-                        output = '<div class="d-flex align-items-center">\
+                    var stateNo = KTUtil.getRandomInt(0, 7);
+                    var states = [
+                        'success',
+                        'primary',
+                        'danger',
+                        'success',
+                        'warning',
+                        'dark',
+                        'primary',
+                        'info'
+                    ];
+                    var state = states[stateNo];
+                    var output = '';
+                    output = '<div class="d-flex align-items-center">\
 								<div class="symbol symbol-40 symbol-' + state + ' flex-shrink-0">\
 									<div class="symbol-label">' + data.name.substring(0, 1) + '</div>\
 								</div>\
 								<div class="ml-2">\
 									<div class="text-dark-75 font-weight-bold line-height-sm">' + data.name + '</div>\
 									<a href="#" class="font-size-sm text-dark-50 text-hover-primary">' +
-                            data.email + '</a>\
+                        data.email + '</a>\
 								</div>\
 							</div>';
                     //}
@@ -94,9 +84,11 @@ var KTDatatableDataLocalDemo = function () {
             }, {
                 field: 'email',
                 title: 'Email',
+                autoHide: false,
             }, {
                 field: 'is_active',
                 title: 'Status',
+                autoHide: false,
                 // callback function support for column rendering
                 template: function (row) {
                     var status = {
@@ -123,57 +115,7 @@ var KTDatatableDataLocalDemo = function () {
                 overflow: 'visible',
                 autoHide: false,
                 template: function () {
-                    return '\
-							<div class="dropdown dropdown-inline">\
-								<a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" data-toggle="dropdown">\
-	                                <span class="svg-icon svg-icon-md">\
-	                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
-	                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
-	                                            <rect x="0" y="0" width="24" height="24"/>\
-	                                            <path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000"/>\
-	                                        </g>\
-	                                    </svg>\
-	                                </span>\
-	                            </a>\
-							  	<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right">\
-	                                <ul class="navi flex-column navi-hover py-2">\
-	                                    <li class="navi-header font-weight-bolder text-uppercase font-size-xs text-primary pb-2">\
-	                                        Choose an action:\
-	                                    </li>\
-	                                    <li class="navi-item">\
-	                                        <a href="#" class="navi-link">\
-	                                            <span class="navi-icon"><i class="la la-print"></i></span>\
-	                                            <span class="navi-text">Print</span>\
-	                                        </a>\
-	                                    </li>\
-	                                    <li class="navi-item">\
-	                                        <a href="#" class="navi-link">\
-	                                            <span class="navi-icon"><i class="la la-copy"></i></span>\
-	                                            <span class="navi-text">Copy</span>\
-	                                        </a>\
-	                                    </li>\
-	                                    <li class="navi-item">\
-	                                        <a href="#" class="navi-link">\
-	                                            <span class="navi-icon"><i class="la la-file-excel-o"></i></span>\
-	                                            <span class="navi-text">Excel</span>\
-	                                        </a>\
-	                                    </li>\
-	                                    <li class="navi-item">\
-	                                        <a href="#" class="navi-link">\
-	                                            <span class="navi-icon"><i class="la la-file-text-o"></i></span>\
-	                                            <span class="navi-text">CSV</span>\
-	                                        </a>\
-	                                    </li>\
-	                                    <li class="navi-item">\
-	                                        <a href="#" class="navi-link">\
-	                                            <span class="navi-icon"><i class="la la-file-pdf-o"></i></span>\
-	                                            <span class="navi-text">PDF</span>\
-	                                        </a>\
-	                                    </li>\
-	                                </ul>\
-							  	</div>\
-							</div>\
-							<a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
+                    return '\<a href="javascript:;" class="btn btn-sm btn-clean btn-icon mr-2" title="Edit details">\
 	                            <span class="svg-icon svg-icon-md">\
 	                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">\
 	                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\
@@ -201,11 +143,11 @@ var KTDatatableDataLocalDemo = function () {
         });
 
         $('#kt_datatable_search_status').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'Status');
+            datatable.search($(this).val().toLowerCase(), 'is_active');
         });
 
         $('#kt_datatable_search_role').on('change', function () {
-            datatable.search($(this).val().toLowerCase(), 'Role');
+            datatable.search($(this).val().toLowerCase(), 'role');
         });
 
         $('#kt_datatable_search_status, #kt_datatable_search_role').selectpicker();
