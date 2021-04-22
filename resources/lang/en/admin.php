@@ -12,7 +12,7 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
+    'settings' => 'Settings',
     'users' => 'Users',
     'users_settings' => 'Users Settings',
     'actions' => 'Actions',

@@ -163,12 +163,40 @@
                         </ul>
                     </div>
                 </li>
-                <li class="menu-item " aria-haspopup="true"><a href="javascript:;" class="menu-link "><i
-                            class="menu-icon flaticon2-console"></i><span class="menu-text">Console</span></a></li>
-                <li class="menu-item " aria-haspopup="true"><a href="javascript:;" class="menu-link "><i
-                            class="menu-icon flaticon2-console"></i><span class="menu-text">System</span></a></li>
-                <li class="menu-item " aria-haspopup="true"><a href="#" class="menu-link "><i
-                            class="menu-icon flaticon2-graph-1"></i><span class="menu-text">Logs</span></a>
+                <li class="menu-item  menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                    <a href="javascript:;" class="menu-link menu-toggle">
+                        <i class="menu-icon flaticon2-console"></i>
+                        <span class="menu-text">@lang( 'admin.settings' )</span>
+                        <i class="menu-arrow"></i>
+                    </a>
+                    <div class="menu-submenu ">
+                        <i class="menu-arrow">
+                        </i>
+                        <ul class="menu-subnav">
+                            <li class="menu-item " aria-haspopup="true">
+                                <a href="{{ route('admin.users.index') }}" class="menu-link ">
+                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                    <span class="menu-text">@lang( 'admin.users' )</span>
+                                </a>
+                            </li>
+                            <li class="menu-item " aria-haspopup="true">
+                                <a href="{{ route('admin.roles.index') }}" class="menu-link ">
+                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                    <span class="menu-text">@lang( 'admin.roles' )</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="{{ route('admin.users.index') }}" class="menu-link ">
+                        <i class="menu-icon flaticon2-console"></i><span class="menu-text">@lang( 'admin.users' )</span>
+                    </a>
+                </li>
+                <li class="menu-item " aria-haspopup="true">
+                    <a href="#" class="menu-link ">
+                        <i class="menu-icon flaticon2-graph-1"></i><span class="menu-text">Logs</span>
+                    </a>
                 </li>
             </ul>
             <!--end::Menu Nav-->

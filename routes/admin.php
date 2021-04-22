@@ -11,6 +11,6 @@ Route::group([
         Route::get('/login', 'LoginController@showLoginForm')->withoutMiddleware('auth:admin')->name('show.login');
         Route::post('/login', 'LoginController@login')->withoutMiddleware('auth:admin')->name('login');
         Route::resource('/users', 'AdminUserController')->name('', 'users');
-        Route::resource('/roles', 'AdminUserController')->name('', 'roles');
+        Route::resource('/roles', 'RoleController')->name('', 'roles');
     });
 });

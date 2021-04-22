@@ -15,7 +15,12 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        $roles = Role::all();
+
+        return view('admin.roles.index', [
+            'roles' => $roles,
+            'module' => 'roles',
+        ]);
     }
 
     /**
@@ -58,7 +63,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        dd($id);
     }
 
     /**
