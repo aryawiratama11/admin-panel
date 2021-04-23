@@ -3,7 +3,7 @@
     <!--begin::Brand-->
     <div class="brand flex-column-auto " id="kt_brand">
         <!--begin::Logo-->
-        <a href="index.html" class="brand-logo">
+        <a href="{{ LaravelLocalization::getURLFromRouteNameTranslated(LaravelLocalization::getCurrentLocale(), 'routes.dashboard') }}" class="brand-logo">
             <img alt="Logo" class="w-65px" src="{{ asset('assets/admin/media/logos/logo-letter-13.png') }}" />
         </a>
         <!--end::Logo-->
@@ -20,7 +20,7 @@
             <!--begin::Menu Nav-->
             <ul class="menu-nav ">
                 <li class="menu-item  menu-item-active" aria-haspopup="true">
-                    <a href="{{ route('admin.dashboard') }}" class="menu-link ">
+                    <a href="{{ LaravelLocalization::getURLFromRouteNameTranslated(LaravelLocalization::getCurrentLocale(), 'routes.dashboard') }}" class="menu-link ">
                         <i class="menu-icon flaticon2-architecture-and-city"></i>
                         <span class="menu-text">Home</span>
                     </a>

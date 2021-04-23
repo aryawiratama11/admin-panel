@@ -2210,26 +2210,19 @@
                     <!--begin::Nav-->
                     <ul class="navi navi-hover py-4">
                         <!--begin::Item-->
-                        <li class="navi-item">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="{{ asset('assets/admin/media/svg/flags/226-united-states.svg') }}"
-                                        alt="" />
-                                </span>
-                                <span class="navi-text">English</span>
-                            </a>
-                        </li>
-                        <!--end::Item-->
-
-                        <!--begin::Item-->
-                        <li class="navi-item active">
-                            <a href="#" class="navi-link">
-                                <span class="symbol symbol-20 mr-3">
-                                    <img src="{{ asset('assets/admin/media/svg/flags/158-egypt.svg') }}" alt="" />
-                                </span>
-                                <span class="navi-text">العربية</span>
-                            </a>
-                        </li>
+                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                            <li class="navi-item">
+                                <a rel="alternate" hreflang="{{ $localeCode }}"
+                                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}"
+                                    class="navi-link">
+                                    <span class="symbol symbol-20 mr-3">
+                                        <img src="{{ asset('assets/admin/media/svg/flags/' . $properties['svg']) }}"
+                                            alt="" />
+                                    </span>
+                                    <span class="navi-text">{{ $properties['native'] }}</span>
+                                </a>
+                            </li>
+                        @endforeach
                         <!--end::Item-->
 
 
