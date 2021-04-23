@@ -31,4 +31,7 @@ return [
     'search' => 'Search',
     'active' => 'Active',
     'inactive' => 'Inactive',
+    'edit' => 'Edit',
+    'user' => 'User',
+    'back' => 'Back',
 ];

@@ -16,6 +16,7 @@
     <!--begin::Page Vendors Styles(used by this page)-->
     <link href="{{ asset('assets/admin/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
         type="text/css" />
+    @yield('css')
     <!--end::Page Vendors Styles-->
 
 

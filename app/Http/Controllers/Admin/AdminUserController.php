@@ -76,9 +76,14 @@ class AdminUserController extends Controller
      * @param  \App\AdminUser  $adminUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(AdminUser $adminUser)
+    public function edit($id)
     {
-        //
+        $roles = Role::all();
+        $admin_user = $this->adminUserRepository->find($id);
+        return view('admin.users.edit', [
+            'admin_user' => $admin_user,
+            'roles' => $roles
+            ]);
     }
 
     /**

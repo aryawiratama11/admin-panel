@@ -20,7 +20,7 @@ class AdminUser extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role_id', 'is_active'
+        'name', 'email', 'password', 'role_id', 'is_active', 'profile_picture'
     ];
 
     /**
@@ -70,5 +70,10 @@ class AdminUser extends Authenticatable
     public function getDeletedAtAttribute($value)
     {
         return date('Y-m-d H:i:s', strtotime($value));
+    }
+
+    public function getImageAttribute()
+    {
+        return $this->profile_image;
     }
 }
