@@ -15,6 +15,7 @@ return [
     'settings' => 'Settings',
     'users' => 'Users',
     'users_settings' => 'Users Settings',
+    'users_management' => 'Users Management',
     'actions' => 'Actions',
     'roles' => 'Roles',
     'new_record' => 'New Record',
