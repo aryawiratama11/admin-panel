@@ -198,9 +198,9 @@
                                         'admin.profile_picture' )</label>
                                     <div class="col-9">
                                         <div class="image-input image-input-empty image-input-outline"
-                                            id="kt_user_edit_avatar" @if (is_null($admin_user->profile_picture)) style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )"
+                                            id="kt_user_edit_avatar" @if (!is_null($admin_user->profile_picture)) style="background-image: url( {{ URL::to('/') . '/uploads/images/profile_pictures/' . $admin_user->profile_picture }} )"
                                             @else
-                                                                                                                            style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )" @endif>
+                                                                                                                                style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )" @endif>
                                             <div class="image-input-wrapper"></div>
 
                                             <label
@@ -208,7 +208,7 @@
                                                 data-action="change" data-toggle="tooltip" title=""
                                                 data-original-title="Change Image Profile">
                                                 <i class="fa fa-pen icon-sm text-muted"></i>
-                                                <input type="file" name="profile_avatar" accept=".png, .jpg, .jpeg" />
+                                                <input type="file" name="profile_picture" accept=".png, .jpg, .jpeg" />
                                                 <input type="hidden" name="profile_avatar_remove" />
                                             </label>
 

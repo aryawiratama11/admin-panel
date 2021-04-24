@@ -8,14 +8,19 @@ use App\Http\Requests\Admin\UpdateAdminUserPasswordRequest;
 use App\Http\Requests\Admin\UpdateAdminUserRequest;
 use App\Http\Resources\AdminUserResource;
 use App\Repositories\AdminUserRepositoryInterface;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminUserController extends Controller
 {
     private $adminUserRepository;
     private $roles;
+    private $image_path;
+
+    use ImageTrait;
 
     /**
      *@param AdminUserRepositoryInterface
@@ -24,6 +29,7 @@ class AdminUserController extends Controller
     {
         $this->adminUserRepository = $adminUserRepository;
         $this->roles = Role::all();
+        $this->image_path =  public_path('uploads/images/profile_pictures') . '/';
     }
 
     /**
@@ -83,7 +89,6 @@ class AdminUserController extends Controller
      */
     public function edit($id)
     {
-
         $adminUser = $this->adminUserRepository->find($id);
         return view('admin.users.edit', [
             'admin_user' => $adminUser,
@@ -101,10 +106,17 @@ class AdminUserController extends Controller
     public function update(UpdateAdminUserRequest $request, $id)
     {
         $adminUser = $this->adminUserRepository->find($id);
+        $file_name = $adminUser->profile_picture;
+
+        $file = $this->verifyAndUpload($request, 'profile_picture', $this->image_path, $file_name);
+        if(!is_null($file)){
+            $file_name = $file;
+        }
 
         $adminUser->name = $request->name;
         $adminUser->email = $request->email;
         $adminUser->role_id = $request->role;
+        $adminUser->profile_picture = $file_name;
 
         $adminUser->save();
 
@@ -150,5 +162,10 @@ class AdminUserController extends Controller
             ->with('status', false)
             ->with('message', 'Current Password Incorrect')
             ->with('current_tab', 'change_password');
+    }
+
+    public function uploadImage(UploadedFile $image, $path)
+    {
+
     }
 }

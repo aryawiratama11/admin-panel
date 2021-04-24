@@ -31,7 +31,8 @@ class UpdateAdminUserRequest extends FormRequest
                 'email',
                 Rule::unique('admin_users')->ignore($this->id)
             ],
-            'role' => 'required|exists:roles,id'
+            'role' => 'required|exists:roles,id',
+            'profile_picture' => 'image|mimes:jpeg,png,jpg|max:2048'
         ];
     }
 }

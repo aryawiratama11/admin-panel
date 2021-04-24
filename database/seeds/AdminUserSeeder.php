@@ -19,7 +19,8 @@ class AdminUserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Crypt::encrypt('admin'),
-            'role_id' => Role::where('name', '=', 'administrator')->firstOrFail()->id
+            'role_id' => Role::where('name', '=', 'administrator')->firstOrFail()->id,
+            'is_super' => 1
         ]);
         $user->assignRole(Role::where('name', '=', 'administrator')->firstOrFail());
     }
