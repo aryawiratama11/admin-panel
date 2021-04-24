@@ -4,14 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\AdminUser;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UpdateAdminUserPasswordRequest;
 use App\Http\Resources\AdminUserResource;
 use App\Repositories\AdminUserRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
 {
     private $adminUserRepository;
+    private $roles;
 
     /**
      *@param AdminUserRepositoryInterface
@@ -19,6 +22,7 @@ class AdminUserController extends Controller
     public function __construct(AdminUserRepositoryInterface $adminUserRepository)
     {
         $this->adminUserRepository = $adminUserRepository;
+        $this->roles = Role::all();
     }
 
     /**
@@ -78,12 +82,12 @@ class AdminUserController extends Controller
      */
     public function edit($id)
     {
-        $roles = Role::all();
-        $admin_user = $this->adminUserRepository->find($id);
+
+        $adminUser = $this->adminUserRepository->find($id);
         return view('admin.users.edit', [
-            'admin_user' => $admin_user,
-            'roles' => $roles
-            ]);
+            'admin_user' => $adminUser,
+            'roles' => $this->roles
+        ]);
     }
 
     /**
@@ -107,5 +111,32 @@ class AdminUserController extends Controller
     public function destroy(AdminUser $adminUser)
     {
         //
+    }
+
+    /**
+     * Update the specified user password in db.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\AdminUser  $adminUser
+     * @return \Illuminate\Http\Response
+     */
+    public function changePassword(UpdateAdminUserPasswordRequest $request, $id)
+    {
+        $adminUser = $this->adminUserRepository->find($id);
+
+        if (Crypt::decrypt($adminUser->password) == $request->current_password) {
+            $adminUser->password = Crypt::encrypt($request->new_password);
+            $adminUser->save();
+            return redirect()
+                ->route('admin.users.edit', $adminUser)
+                ->with('status', true)
+                ->with('message', 'Password Changed Successfully');
+        }
+
+        return redirect()
+            ->route('admin.users.edit', $adminUser)
+            ->with('status', false)
+            ->with('message', 'Current Password Incorrect')
+            ->with('current_tab', 'change_password');
     }
 }

@@ -34,4 +34,8 @@ return [
     'edit' => 'Edit',
     'user' => 'User',
     'back' => 'Back',
+    'profile_picture' => 'Profile Picture',
+    'profile' => 'Profile',
+    'name' => 'Name',
+
 ];

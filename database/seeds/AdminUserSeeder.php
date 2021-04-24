@@ -2,6 +2,7 @@
 
 use App\Models\AdminUser;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Crypt;
 use Spatie\Permission\Models\Role;
 
 class AdminUserSeeder extends Seeder
@@ -17,7 +18,7 @@ class AdminUserSeeder extends Seeder
         $user = AdminUser::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => \Illuminate\Support\Facades\Hash::make('admin'),
+            'password' => Crypt::encrypt('admin'),
             'role_id' => Role::where('name', '=', 'administrator')->firstOrFail()->id
         ]);
         $user->assignRole(Role::where('name', '=', 'administrator')->firstOrFail());

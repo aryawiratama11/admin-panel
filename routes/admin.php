@@ -13,6 +13,7 @@ Route::group([
         Route::get('/login', 'LoginController@showLoginForm')->withoutMiddleware('auth:admin')->name('show.login');
         Route::post('/login', 'LoginController@login')->withoutMiddleware('auth:admin')->name('login');
         Route::resource('users', 'AdminUserController')->name('', 'users');
+        Route::post('users/{user}/changepassword', 'AdminUserController@changePassword')->name('users.changepassword');
         Route::resource('/roles', 'RoleController')->name('', 'roles');
     });
 });

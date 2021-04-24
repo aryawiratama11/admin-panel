@@ -1,7 +1,7 @@
 @extends('layouts.admin.app')
 
 @section('title')
-    Admin-Users Settings
+    Admin-Edit User Account
 @endsection
 
 @section('css')
@@ -86,6 +86,22 @@
         </div>
     </div>
     <!--end::Subheader-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class=" container ">
+            <!--begin::Notice-->
+            @if (session('message'))
+                <div class="alert @if(session('status')) alert-success @else alert-danger @endif alert-dismissible fade show" role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            @endif
+            <!--end::Notice-->
+        </div>
+        <!--end::Container-->
+    </div>
 @endsection
 
 @section('content')
@@ -98,7 +114,7 @@
                 <ul class="nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-3x">
                     <!--begin::Item-->
                     <li class="nav-item mr-3">
-                        <a class="nav-link active" data-toggle="tab" href="#kt_user_edit_tab_1">
+                        <a class="nav-link @if (!session('current_tab')) active @endif" data-toggle="tab" href="#kt_user_edit_tab_1">
                             <span class="nav-icon"><span class="svg-icon">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -115,14 +131,14 @@
                                     </svg>
                                     <!--end::Svg Icon-->
                                 </span></span>
-                            <span class="nav-text font-size-lg">Profile</span>
+                            <span class="nav-text font-size-lg">@lang( 'admin.profile' )</span>
                         </a>
                     </li>
                     <!--end::Item-->
 
                     <!--begin::Item-->
                     <li class="nav-item mr-3">
-                        <a class="nav-link" data-toggle="tab" href="#kt_user_edit_tab_3">
+                        <a class="nav-link @if (session('current_tab')) active @endif" data-toggle="tab" href="#kt_user_edit_tab_3">
                             <span class="nav-icon"><span class="svg-icon">
                                     <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Shield-user.svg--><svg
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -154,12 +170,12 @@
 
         <!--begin::Card body-->
         <div class="card-body px-0">
-            <form action="{{ route('admin.users.update', $admin_user) }}" class="form" id="kt_form"
-                enctype="multipart/form-data" method="POST">
-                @csrf
-                <div class="tab-content">
-                    <!--begin::Tab-->
-                    <div class="tab-pane show active px-7" id="kt_user_edit_tab_1" role="tabpanel">
+            <div class="tab-content">
+                <!--begin::Tab-->
+                <div class="tab-pane show px-7 @if (!session('current_tab')) active @endif" id="kt_user_edit_tab_1" role="tabpanel">
+                    <form action="{{ route('admin.users.update', $admin_user) }}" class="form" id="kt_edit_adminuser_form"
+                        enctype="multipart/form-data" method="POST">
+                        @csrf
                         <!--begin::Row-->
                         <div class="row">
                             <div class="col-xl-2"></div>
@@ -168,19 +184,20 @@
                                 <div class="row">
                                     <label class="col-3"></label>
                                     <div class="col-9">
-                                        <h6 class=" text-dark font-weight-bold mb-10">Customer
+                                        <h6 class=" text-dark font-weight-bold mb-10">@lang('admin.user')
                                             Info:</h6>
                                     </div>
                                 </div>
                                 <!--end::Row-->
                                 <!--begin::Group-->
                                 <div class="form-group row">
-                                    <label class="col-form-label col-3 text-lg-right text-left">Profile Picture</label>
+                                    <label class="col-form-label col-3 text-lg-right text-left">@lang(
+                                        'admin.profile_picture' )</label>
                                     <div class="col-9">
                                         <div class="image-input image-input-empty image-input-outline"
                                             id="kt_user_edit_avatar" @if (is_null($admin_user->profile_picture)) style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )"
                                             @else
-                                                        style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )" @endif>
+                                                                                            style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )" @endif>
                                             <div class="image-input-wrapper"></div>
 
                                             <label
@@ -209,7 +226,8 @@
                                 <!--end::Group-->
                                 <!--begin::Group-->
                                 <div class="form-group row">
-                                    <label class="col-form-label col-3 text-lg-right text-left">Name</label>
+                                    <label class="col-form-label col-3 text-lg-right text-left">@lang( 'admin.name'
+                                        )</label>
                                     <div class="col-9">
                                         <input name="name" class="form-control form-control-lg form-control-solid"
                                             type="text" value="{{ $admin_user->name }}" />
@@ -218,40 +236,69 @@
                                 <!--end::Group-->
                                 <!--begin::Group-->
                                 <div class="form-group row">
-                                    <label class="col-form-label col-3 text-lg-right text-left">Email
-                                        Address</label>
-                                    <div class="col-9">
-                                        <div class="input-group input-group-lg input-group-solid">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i
-                                                        class="la la-at"></i></span></div>
-                                            <input type="text" name="email"
-                                                class="form-control form-control-lg form-control-solid"
-                                                value="{{ $admin_user->email }}" placeholder="Email" />
-                                        </div>
+                                    <label class="col-form-label text-right col-lg-3 col-sm-12">Email
+                                        *</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <input type="text" class="form-control" name="email"
+                                            value="{{ $admin_user->email }}" placeholder="Enter your email" />
                                     </div>
                                 </div>
                                 <!--end::Group-->
+                                <!--begin::Group-->
                                 <div class="form-group row">
-                                    <label class="col-form-label col-3 text-lg-right text-left">Role</label>
-                                    <div class="col-9">
-                                        <select class="form-control form-control-lg form-control-solid">
-                                            <option value="0">Select Role...</option>
+                                    <label class="col-form-label text-right col-lg-3 col-sm-12">@lang( 'admin.role' )
+                                        *</label>
+                                    <div class="col-lg-9 col-md-9 col-sm-12">
+                                        <select class="form-control" name="option">
+                                            <option value="">@lang( 'admin.select' )</option>
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}" @if ($role->id == $admin_user->role_id) selected @endif>{{ $role->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
+                                <!--end::Group-->
                             </div>
                         </div>
                         <!--end::Row-->
-                    </div>
-                    <!--end::Tab-->
 
-                    <!--begin::Tab-->
-                    <div class="tab-pane px-7" id="kt_user_edit_tab_3" role="tabpanel">
-                        <!--begin::Body-->
+                        <!--begin::Footer-->
+                        <div class="card-footer pb-0">
+                            <div class="row">
+                                <div class="col-xl-2"></div>
+                                <div class="col-xl-7">
+                                    <div class="row">
+                                        <div class="col-3"></div>
+                                        <div class="col-9">
+                                            <a href="#" class="btn btn-light-primary font-weight-bold">Save changes</a>
+                                            <a href="{{ url()->previous() }}"
+                                                class="btn btn-clean font-weight-bold">Cancel</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end::Footer-->
+                    </form>
+                </div>
+                <!--end::Tab-->
+
+                <!--begin::Tab-->
+                <div class="tab-pane px-7 @if (session('current_tab')) active @endif" id="kt_user_edit_tab_3" role="tabpanel">
+                    <!--begin::Body-->
+                    <form action="{{ route('admin.users.changepassword', $admin_user) }}" class="form"
+                        id="kt_edit_adminuser_password_form" enctype="multipart/form-data" method="POST">
+                        @csrf
                         <div class="card-body">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <!--begin::Row-->
                             <div class="row">
                                 <div class="col-xl-2"></div>
@@ -271,7 +318,8 @@
                                         <label class="col-form-label col-3 text-lg-right text-left">Current
                                             Password</label>
                                         <div class="col-9">
-                                            <input class="form-control form-control-lg form-control-solid mb-1" type="password"/>
+                                            <input class="form-control form-control-lg form-control-solid mb-1"
+                                                type="password" name="current_password" />
                                             <a href="#" class="font-weight-bold font-size-sm">Forgot
                                                 password ?</a>
                                         </div>
@@ -283,7 +331,8 @@
                                         <label class="col-form-label col-3 text-lg-right text-left">New
                                             Password</label>
                                         <div class="col-9">
-                                            <input class="form-control form-control-lg form-control-solid" type="password"/>
+                                            <input class="form-control form-control-lg form-control-solid"
+                                                name="new_password" type="password" />
                                         </div>
                                     </div>
                                     <!--end::Group-->
@@ -293,7 +342,8 @@
                                         <label class="col-form-label col-3 text-lg-right text-left">Verify
                                             Password</label>
                                         <div class="col-9">
-                                            <input class="form-control form-control-lg form-control-solid" type="text" type="password"/>
+                                            <input class="form-control form-control-lg form-control-solid" type="password"
+                                                type="password" name="new_password_confirmation" />
                                         </div>
                                     </div>
                                     <!--end::Group-->
@@ -311,8 +361,8 @@
                                     <div class="row">
                                         <div class="col-3"></div>
                                         <div class="col-9">
-                                            <a href="#" class="btn btn-light-primary font-weight-bold">Save
-                                                changes</a>
+                                            <button type="submit" class="btn btn-light-primary font-weight-bold">Save
+                                                changes</button>
                                             <a href="{{ url()->previous() }}"
                                                 class="btn btn-clean font-weight-bold">Cancel</a>
                                         </div>
@@ -321,10 +371,10 @@
                             </div>
                         </div>
                         <!--end::Footer-->
-                    </div>
-                    <!--end::Tab-->
+                    </form>
                 </div>
-            </form>
+                <!--end::Tab-->
+            </div>
         </div>
         <!--begin::Card body-->
     </div>

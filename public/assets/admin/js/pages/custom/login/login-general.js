@@ -42,7 +42,7 @@ var KTLogin = function() {
                             },
                             stringLength: {
                                 min:5,
-                                message: 'Password must be at least 6 characters'
+                                message: 'Password must be at least 5 characters'
                             }
 						}
 					}

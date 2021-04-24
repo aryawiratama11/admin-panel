@@ -55,6 +55,11 @@
                         </div>
                         <form class="form fv-plugins-bootstrap fv-plugins-framework" id="login_form" action="{{ route('admin.login') }}" method="POST">
                             @csrf
+                            @if(session('message'))
+                                <div class="alert alert-danger">
+                                    <p>{{ session('message') }}</p>
+                                </div>
+                            @endif
                             @error('email')
                                 <div class="alert alert-danger">
                                     <p>{{ $message }}</p>
