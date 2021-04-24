@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\AdminUser;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UpdateAdminUserPasswordRequest;
+use App\Http\Requests\Admin\UpdateAdminUserRequest;
 use App\Http\Resources\AdminUserResource;
 use App\Repositories\AdminUserRepositoryInterface;
 use Illuminate\Http\Request;
@@ -97,9 +98,20 @@ class AdminUserController extends Controller
      * @param  \App\AdminUser  $adminUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AdminUser $adminUser)
+    public function update(UpdateAdminUserRequest $request, $id)
     {
-        //
+        $adminUser = $this->adminUserRepository->find($id);
+
+        $adminUser->name = $request->name;
+        $adminUser->email = $request->email;
+        $adminUser->role_id = $request->role;
+
+        $adminUser->save();
+
+        return redirect()
+            ->route('admin.users.edit', $adminUser)
+            ->with('status', true)
+            ->with('message', 'User Updated Successfully');
     }
 
     /**

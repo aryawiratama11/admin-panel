@@ -91,7 +91,8 @@
         <div class=" container ">
             <!--begin::Notice-->
             @if (session('message'))
-                <div class="alert @if(session('status')) alert-success @else alert-danger @endif alert-dismissible fade show" role="alert">
+                <div class="alert @if (session('status')) alert-success @else alert-danger @endif alert-dismissible fade show"
+                    role="alert">
                     {{ session('message') }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -173,9 +174,11 @@
             <div class="tab-content">
                 <!--begin::Tab-->
                 <div class="tab-pane show px-7 @if (!session('current_tab')) active @endif" id="kt_user_edit_tab_1" role="tabpanel">
-                    <form action="{{ route('admin.users.update', $admin_user) }}" class="form" id="kt_edit_adminuser_form"
-                        enctype="multipart/form-data" method="POST">
+                    <form action="{{ route('admin.users.update', $admin_user->id) }}" class="form"
+                        id="kt_edit_adminuser_form" enctype="multipart/form-data" method="POST">
+                        @method('put')
                         @csrf
+                        <input type="hidden" name="id" value="{{ $admin_user->id }}">
                         <!--begin::Row-->
                         <div class="row">
                             <div class="col-xl-2"></div>
@@ -197,7 +200,7 @@
                                         <div class="image-input image-input-empty image-input-outline"
                                             id="kt_user_edit_avatar" @if (is_null($admin_user->profile_picture)) style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )"
                                             @else
-                                                                                            style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )" @endif>
+                                                                                                                            style="background-image: url( {{ asset('assets/admin/media/users/blank.png') }} )" @endif>
                                             <div class="image-input-wrapper"></div>
 
                                             <label
@@ -227,20 +230,32 @@
                                 <!--begin::Group-->
                                 <div class="form-group row">
                                     <label class="col-form-label col-3 text-lg-right text-left">@lang( 'admin.name'
-                                        )</label>
+                                        ) *</label>
                                     <div class="col-9">
                                         <input name="name" class="form-control form-control-lg form-control-solid"
                                             type="text" value="{{ $admin_user->name }}" />
+                                        @error('name')
+                                            <div class="fv-plugins-message-container">
+                                                <div class="fv-help-block">
+                                                    {{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!--end::Group-->
                                 <!--begin::Group-->
                                 <div class="form-group row">
-                                    <label class="col-form-label text-right col-lg-3 col-sm-12">Email
+                                    <label class="col-form-label text-right col-lg-3 col-sm-12">@lang( 'admin.email' )
                                         *</label>
                                     <div class="col-lg-9 col-md-9 col-sm-12">
                                         <input type="text" class="form-control" name="email"
                                             value="{{ $admin_user->email }}" placeholder="Enter your email" />
+                                        @error('email')
+                                            <div class="fv-plugins-message-container">
+                                                <div class="fv-help-block">
+                                                    {{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!--end::Group-->
@@ -249,12 +264,18 @@
                                     <label class="col-form-label text-right col-lg-3 col-sm-12">@lang( 'admin.role' )
                                         *</label>
                                     <div class="col-lg-9 col-md-9 col-sm-12">
-                                        <select class="form-control" name="option">
+                                        <select class="form-control" name="role">
                                             <option value="">@lang( 'admin.select' )</option>
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}" @if ($role->id == $admin_user->role_id) selected @endif>{{ $role->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('role')
+                                            <div class="fv-plugins-message-container">
+                                                <div class="fv-help-block">
+                                                    {{ $message }}</div>
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!--end::Group-->
@@ -270,9 +291,10 @@
                                     <div class="row">
                                         <div class="col-3"></div>
                                         <div class="col-9">
-                                            <a href="#" class="btn btn-light-primary font-weight-bold">Save changes</a>
+                                            <button type="submit" class="btn btn-light-primary font-weight-bold">@lang(
+                                                'admin.save_changes' )</button>
                                             <a href="{{ url()->previous() }}"
-                                                class="btn btn-clean font-weight-bold">Cancel</a>
+                                                class="btn btn-clean font-weight-bold">@lang( 'admin.save' )</a>
                                         </div>
                                     </div>
                                 </div>
@@ -290,15 +312,6 @@
                         id="kt_edit_adminuser_password_form" enctype="multipart/form-data" method="POST">
                         @csrf
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                             <!--begin::Row-->
                             <div class="row">
                                 <div class="col-xl-2"></div>
@@ -322,6 +335,12 @@
                                                 type="password" name="current_password" />
                                             <a href="#" class="font-weight-bold font-size-sm">Forgot
                                                 password ?</a>
+                                            @error('current_password')
+                                                <div class="fv-plugins-message-container">
+                                                    <div class="fv-help-block">
+                                                        {{ $message }}</div>
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <!--end::Group-->
@@ -333,6 +352,12 @@
                                         <div class="col-9">
                                             <input class="form-control form-control-lg form-control-solid"
                                                 name="new_password" type="password" />
+                                            @error('new_password')
+                                                <div class="fv-plugins-message-container">
+                                                    <div class="fv-help-block">
+                                                        {{ $message }}</div>
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <!--end::Group-->
@@ -344,6 +369,12 @@
                                         <div class="col-9">
                                             <input class="form-control form-control-lg form-control-solid" type="password"
                                                 type="password" name="new_password_confirmation" />
+                                            @error('new_password_confirmation')
+                                                <div class="fv-plugins-message-container">
+                                                    <div class="fv-help-block">
+                                                        {{ $message }}</div>
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <!--end::Group-->

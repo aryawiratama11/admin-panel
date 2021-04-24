@@ -4,7 +4,7 @@
 var KTUserEdit = function () {
     // Base elements
 
-    var initUserForm = function () {
+    var initChangeAdminUserPasswordForm = function () {
         let form = document.getElementById('kt_edit_adminuser_password_form');
         let formValidation = FormValidation.formValidation(
            form , {
@@ -68,10 +68,55 @@ var KTUserEdit = function () {
         });
     }
 
+    var initEditUserForm = function () {
+        let form = document.getElementById('kt_edit_adminuser_form');
+        let formValidation = FormValidation.formValidation(
+            form , {
+                 fields: {
+                     name: {
+                         validators: {
+                             notEmpty: {
+                                 message: 'Name is required'
+                             },
+                         }
+                     },
+                     email: {
+                         validators: {
+                             notEmpty: {
+                                 message: 'Email is required'
+                             },
+                             emailAddress: {
+								message: 'The value is not a valid email address'
+							}
+                         }
+                     },
+                     role: {
+						validators: {
+							notEmpty: {
+								message: 'Please select role'
+							}
+						}
+					},
+                 },
+
+                 plugins: { //Learn more: https://formvalidation.io/guide/plugins
+                     trigger: new FormValidation.plugins.Trigger(),
+                     // Bootstrap Framework Integration
+                     bootstrap: new FormValidation.plugins.Bootstrap(),
+                     // Validate fields when clicking the Submit button
+                     submitButton: new FormValidation.plugins.SubmitButton(),
+                     // Submit the form when all fields are valid
+                     defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+                 }
+             }
+         );
+    }
+
     return {
         // public functions
         init: function () {
-            initUserForm();
+            initChangeAdminUserPasswordForm();
+            initEditUserForm();
         }
     };
 }();

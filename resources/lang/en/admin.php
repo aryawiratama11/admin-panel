@@ -37,5 +37,9 @@ return [
     'profile_picture' => 'Profile Picture',
     'profile' => 'Profile',
     'name' => 'Name',
+    'save_changes' => 'Save Changes',
+    'cancel' => 'Cancel',
+    'select' => 'Select',
+    'save' => 'Save',
 
 ];
