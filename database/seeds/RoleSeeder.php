@@ -16,22 +16,22 @@ class RoleSeeder extends Seeder
         $role = Role::create([
             'name' => 'administrator', 'guard_name' => 'admin'
         ]);
-        $role->givePermissionTo('list admin_users');
-        $role->givePermissionTo('create admin_users');
-        $role->givePermissionTo('edit admin_users');
-        $role->givePermissionTo('delete admin_users');
-        $role->givePermissionTo('is_active admin_users');
+        $role->givePermissionTo('view_admin_users');
+        $role->givePermissionTo('create_admin_users');
+        $role->givePermissionTo('edit_admin_users');
+        $role->givePermissionTo('delete_admin_users');
+        $role->givePermissionTo('is_active_admin_users');
 
-        $role->givePermissionTo('list roles');
-        $role->givePermissionTo('create roles');
-        $role->givePermissionTo('edit roles');
-        $role->givePermissionTo('delete roles');
-        $role->givePermissionTo('is_active roles');
+        $role->givePermissionTo('view_roles');
+        $role->givePermissionTo('create_roles');
+        $role->givePermissionTo('edit_roles');
+        $role->givePermissionTo('delete_roles');
+        $role->givePermissionTo('is_active_roles');
 
-        $role->givePermissionTo('list modules');
-        $role->givePermissionTo('create modules');
-        $role->givePermissionTo('edit modules');
-        $role->givePermissionTo('delete modules');
-        $role->givePermissionTo('is_active modules');
+        $role->givePermissionTo('view_modules');
+        $role->givePermissionTo('create_modules');
+        $role->givePermissionTo('edit_modules');
+        $role->givePermissionTo('delete_modules');
+        $role->givePermissionTo('is_active_modules');
     }
 }

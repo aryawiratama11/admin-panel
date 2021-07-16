@@ -173,26 +173,33 @@
                         <i class="menu-arrow">
                         </i>
                         <ul class="menu-subnav">
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('admin.users.index') }}" class="menu-link ">
-                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                    <span class="menu-text">@lang( 'admin.users' )</span>
-                                </a>
-                            </li>
-                            <li class="menu-item " aria-haspopup="true">
-                                <a href="{{ route('admin.roles.index') }}" class="menu-link ">
-                                    <i class="menu-bullet menu-bullet-dot"><span></span></i>
-                                    <span class="menu-text">@lang( 'admin.roles' )</span>
-                                </a>
-                            </li>
+                            @if (auth('admin')->user()->can('view_admin_users'))
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('admin.users.index') }}" class="menu-link ">
+                                        <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                        <span class="menu-text">@lang( 'admin.users' )</span>
+                                    </a>
+                                </li>
+                            @endif
+                            @if (auth('admin')->user()->can('view_roles'))
+                                <li class="menu-item " aria-haspopup="true">
+                                    <a href="{{ route('admin.roles.index') }}" class="menu-link ">
+                                        <i class="menu-bullet menu-bullet-dot"><span></span></i>
+                                        <span class="menu-text">@lang( 'admin.roles' )</span>
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </li>
-                <li class="menu-item " aria-haspopup="true">
-                    <a href="{{ route('admin.users.index') }}" class="menu-link ">
-                        <i class="menu-icon flaticon2-console"></i><span class="menu-text">@lang( 'admin.users' )</span>
-                    </a>
-                </li>
+                @if (auth('admin')->user()->can('view_admin_users'))
+                    <li class="menu-item " aria-haspopup="true">
+                        <a href="{{ route('admin.users.index') }}" class="menu-link ">
+                            <i class="menu-icon flaticon2-console"></i><span class="menu-text">@lang( 'admin.users'
+                                )</span>
+                        </a>
+                    </li>
+                @endif
                 <li class="menu-item " aria-haspopup="true">
                     <a href="#" class="menu-link ">
                         <i class="menu-icon flaticon2-graph-1"></i><span class="menu-text">Logs</span>

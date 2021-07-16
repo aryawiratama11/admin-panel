@@ -24,93 +24,93 @@ class PermissionSeeder extends Seeder
         // create permissions to admin_user module
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'list admin_users',
+            'name' => 'view_admin_users',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'create admin_users',
+            'name' => 'create_admin_users',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'edit admin_users',
+            'name' => 'edit_admin_users',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'delete admin_users',
+            'name' => 'delete_admin_users',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'is_active admin_users',
+            'name' => 'is_active_admin_users',
             'module_id' => $admin_users_module->id
         ]);
 
         // create permissions to roles module
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'list roles',
+            'name' => 'view_roles',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'create roles',
+            'name' => 'create_roles',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'edit roles',
+            'name' => 'edit_roles',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'delete roles',
+            'name' => 'delete_roles',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'is_active roles',
+            'name' => 'is_active_roles',
             'module_id' => $roles_module->id
         ]);
 
         // create permissions to modules module
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'list modules',
+            'name' => 'view_modules',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'create modules',
+            'name' => 'create_modules',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'edit modules',
+            'name' => 'edit_modules',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'delete modules',
+            'name' => 'delete_modules',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'is_active modules',
+            'name' => 'is_active_modules',
             'module_id' => $modules_module->id
         ]);
     }

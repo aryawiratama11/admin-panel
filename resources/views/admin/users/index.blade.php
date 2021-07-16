@@ -66,33 +66,45 @@
                                     data-placement="right" title="Click to learn more..."></i>
                             </li>
                             <li class="navi-separator mb-3 opacity-70"></li>
+                            @if (auth('admin')->user()->can('view_admin_users'))
                             <li class="navi-item">
                                 <a href="{{ route('admin.users.index') }}" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-success">@lang( 'admin.users' )</span>
+                                        <span class="label label-xl label-inline label-light-success">@lang( 'admin.users'
+                                            )</span>
                                     </span>
                                 </a>
                             </li>
+                            @endif
+                            @if (auth('admin')->user()->can('view_roles'))
                             <li class="navi-item">
                                 <a href="{{ route('admin.roles.index') }}" class="navi-link">
                                     <span class="navi-text">
-                                        <span class="label label-xl label-inline label-light-danger">@lang( 'admin.roles' )</span>
+                                        <span class="label label-xl label-inline label-light-danger">@lang( 'admin.roles'
+                                            )</span>
                                     </span>
                                 </a>
                             </li>
+                            @endif
                             <li class="navi-separator mt-3 opacity-70"></li>
-                            <li class="navi-footer py-4">
-                                <a class="btn btn-clean font-weight-bold btn-sm" href="{{ route('admin.users.create') }}">
-                                    <i class="ki ki-plus icon-sm"></i>
-                                    @lang( 'admin.add' ) @lang( 'admin.new' ) @lang( 'admin.user' )
-                                </a>
-                            </li>
-                            <li class="navi-footer py-4">
-                                <a class="btn btn-clean font-weight-bold btn-sm" href="{{ route('admin.roles.create') }}">
-                                    <i class="ki ki-plus icon-sm"></i>
-                                    @lang( 'admin.add' ) @lang( 'admin.new' ) @lang( 'admin.role' )
-                                </a>
-                            </li>
+                            @if (auth('admin')->user()->can('create_admin_users'))
+                                <li class="navi-footer py-4">
+                                    <a class="btn btn-clean font-weight-bold btn-sm"
+                                        href="{{ route('admin.users.create') }}">
+                                        <i class="ki ki-plus icon-sm"></i>
+                                        @lang( 'admin.add' ) @lang( 'admin.new' ) @lang( 'admin.user' )
+                                    </a>
+                                </li>
+                            @endif
+                            @if (auth('admin')->user()->can('create_roles'))
+                                <li class="navi-footer py-4">
+                                    <a class="btn btn-clean font-weight-bold btn-sm"
+                                        href="{{ route('admin.roles.create') }}">
+                                        <i class="ki ki-plus icon-sm"></i>
+                                        @lang( 'admin.add' ) @lang( 'admin.new' ) @lang( 'admin.role' )
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                         <!--end::Navigation-->
                     </div>
@@ -225,7 +237,6 @@
 @section('script')
     <script>
         var dataJSONArray = {!! json_encode($users) !!};
-
     </script>
     <script src="{{ asset('assets/admin/js/data-rendering/admin-users.js') }}"></script>
 @endsection
