@@ -20,21 +20,21 @@ Route::group([
                 Route::get('/', 'AdminUserController@index')->name('users.index');
             });
 
-            Route::group(['middleware' => ['hasPermission:create_admin_users']], function () {
+            Route::group(['middleware' => ['hasPermission:create_admin_user']], function () {
                 Route::get('/create', 'AdminUserController@create')->name('users.create');
                 Route::post('/', 'AdminUserController@store')->name('users.store');
             });
 
-            Route::group(['middleware' => ['hasPermission:edit_admin_users']], function () {
+            Route::group(['middleware' => ['hasPermission:edit_admin_user']], function () {
                 Route::get('/{user}/edit', 'AdminUserController@edit')->name('users.edit');
                 Route::match(['patch', 'put'], '/{user}', 'AdminUserController@update')->name('users.update');
             });
 
-            Route::group(['middleware' => ['hasPermission:delete_admin_users']], function () {
+            Route::group(['middleware' => ['hasPermission:delete_admin_user']], function () {
                 Route::delete('/{user}', 'AdminUserController@destroy')->name('users.destroy');
             });
 
-            Route::group(['middleware' => ['hasPermission:edit_admin_users']], function () {
+            Route::group(['middleware' => ['hasPermission:edit_admin_user']], function () {
                 Route::post('{user}/changepassword', 'AdminUserController@changePassword')->name('users.changepassword');
             });
         });
@@ -46,17 +46,17 @@ Route::group([
                 Route::get('/', 'RoleController@index')->name('roles.index');
             });
 
-            Route::group(['middleware' => ['hasPermission:create_roles']], function () {
+            Route::group(['middleware' => ['hasPermission:create_role']], function () {
                 Route::get('/create', 'RoleController@create')->name('roles.create');
                 Route::post('/', 'RoleController@store')->name('roles.store');
             });
 
-            Route::group(['middleware' => ['hasPermission:edit_roles']], function () {
+            Route::group(['middleware' => ['hasPermission:edit_role']], function () {
                 Route::get('/{role}/edit', 'RoleController@edit')->name('roles.edit');
                 Route::match(['patch', 'put'], '/{role}', 'RoleController@update')->name('roles.update');
             });
 
-            Route::group(['middleware' => ['hasPermission:delete_roles']], function () {
+            Route::group(['middleware' => ['hasPermission:delete_role']], function () {
                 Route::delete('/{role}', 'RoleController@destroy')->name('roles.destroy');
             });
         });

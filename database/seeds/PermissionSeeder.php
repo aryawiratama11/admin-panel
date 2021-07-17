@@ -25,30 +25,35 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'guard_name' => 'admin',
             'name' => 'view_admin_users',
+            'label' => 'View Admin Users',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'create_admin_users',
+            'name' => 'create_admin_user',
+            'label' => 'Create Admin User',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'edit_admin_users',
+            'name' => 'edit_admin_user',
+            'label' => 'Edit Admin User',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'delete_admin_users',
+            'name' => 'delete_admin_user',
+            'label' => 'Delete Admin User',
             'module_id' => $admin_users_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'is_active_admin_users',
+            'name' => 'is_active_admin_user',
+            'label' => 'Is Active Admin User',
             'module_id' => $admin_users_module->id
         ]);
 
@@ -56,30 +61,35 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'guard_name' => 'admin',
             'name' => 'view_roles',
+            'label' => 'View Roles',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'create_roles',
+            'name' => 'create_role',
+            'label' => 'Create Role',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'edit_roles',
+            'name' => 'edit_role',
+            'label' => 'Edit Role',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'delete_roles',
+            'name' => 'delete_role',
+            'label' => 'Delete Role',
             'module_id' => $roles_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'is_active_roles',
+            'name' => 'is_active_role',
+            'label' => 'Is Active Role',
             'module_id' => $roles_module->id
         ]);
 
@@ -87,30 +97,35 @@ class PermissionSeeder extends Seeder
         Permission::create([
             'guard_name' => 'admin',
             'name' => 'view_modules',
+            'label' => 'View Modules',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'create_modules',
+            'name' => 'create_module',
+            'label' => 'Create Module',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'edit_modules',
+            'name' => 'edit_module',
+            'label' => 'Edit Module',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'delete_modules',
+            'name' => 'delete_module',
+            'label' => 'Delete Module',
             'module_id' => $modules_module->id
         ]);
 
         Permission::create([
             'guard_name' => 'admin',
-            'name' => 'is_active_modules',
+            'name' => 'is_active_module',
+            'label' => 'Is Active Module',
             'module_id' => $modules_module->id
         ]);
     }

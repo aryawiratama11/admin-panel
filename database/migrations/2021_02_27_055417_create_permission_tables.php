@@ -24,6 +24,7 @@ class CreatePermissionTables extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('module_id');
             $table->string('name');
+            $table->string('label');
             $table->string('guard_name');
             $table->softDeletes();
             $table->timestamps();

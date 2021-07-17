@@ -17,5 +17,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AdminUserSeeder::class,
         ]);
+
+        // Modules Data Seeders
+        $this->call([
+            \Modules\Address\Database\Seeders\AddressDatabaseSeeder::class,
+        ]);
     }
 }

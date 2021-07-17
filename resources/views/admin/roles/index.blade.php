@@ -86,7 +86,7 @@
                                 </li>
                             @endif
                             <li class="navi-separator mt-3 opacity-70"></li>
-                            @if (auth('admin')->user()->can('create_admin_users'))
+                            @if (auth('admin')->user()->can('create_admin_user'))
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm"
                                         href="{{ route('admin.users.create') }}">
@@ -95,7 +95,7 @@
                                     </a>
                                 </li>
                             @endif
-                            @if (auth('admin')->user()->can('create_roles'))
+                            @if (auth('admin')->user()->can('create_role'))
                                 <li class="navi-footer py-4">
                                     <a class="btn btn-clean font-weight-bold btn-sm"
                                         href="{{ route('admin.roles.create') }}">
